@@ -1,0 +1,55 @@
+package com.locationtracker;
+
+import android.content.Intent;
+
+import com.facebook.react.bridge.ReactApplicationContext;
+
+import com.facebook.react.bridge.ReactContextBaseJavaModule;
+
+import com.facebook.react.bridge.ReactMethod;
+
+import android.util.Log;
+
+import javax.annotation.Nonnull;
+
+public class LocationModule extends ReactContextBaseJavaModule {
+
+   public static final String REACT_CLASS = "Location";
+
+   private static ReactApplicationContext reactContext;
+
+   public LocationModule(@Nonnull ReactApplicationContext reactContext) {
+
+       super(reactContext);
+
+       this.reactContext = reactContext;
+
+   }
+
+   @Nonnull
+
+   @Override
+
+   public String getName() {
+
+       return REACT_CLASS;
+
+   }
+
+   @ReactMethod
+
+   public void startService() {
+
+       this.reactContext.startService(new Intent(this.reactContext, LocationService.class));
+
+   }
+
+   @ReactMethod
+
+   public void stopService() {
+
+       this.reactContext.stopService(new Intent(this.reactContext, LocationService.class));
+
+   }
+
+}
